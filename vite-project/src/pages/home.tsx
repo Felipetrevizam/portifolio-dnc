@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Container, Box, Grid } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import { Header, Card, CardTitle, CardValue, CardLabel, CustomChart, AvatarsList, CustomTable } from '../components'
 import { pxToRem, currencyConverter } from '../utils'
 
@@ -28,14 +28,6 @@ const HeroSubtitle = styled.p`
   opacity: 0.95;
   margin: 0;
   font-weight: 400;
-`
-
-const SectionTitle = styled.h2`
-  font-size: ${pxToRem(28)};
-  font-weight: 700;
-  color: ${({ theme }) => theme.textPrimary};
-  margin-bottom: ${pxToRem(24)};
-  letter-spacing: -0.5px;
 `
 
 const Section = styled.section`
@@ -153,42 +145,33 @@ const Home = () => {
 
       <Container maxWidth="xl">
         <Section>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={3}>
-              <Card variant="info">
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' }, gap: 3 }}>
+            <Card variant="info">
                 <CardLabel>Total de Vendas</CardLabel>
                 <CardValue>{currencyConverter(334000)}</CardValue>
                 <CardLabel>+15% este mês</CardLabel>
               </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
               <Card variant="success">
                 <CardLabel>Leads Convertidos</CardLabel>
                 <CardValue>280</CardValue>
                 <CardLabel>+23% este mês</CardLabel>
               </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
               <Card variant="warning">
                 <CardLabel>Taxa de Conversão</CardLabel>
                 <CardValue>68%</CardValue>
                 <CardLabel>+5% este mês</CardLabel>
               </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
               <Card variant="error">
                 <CardLabel>Ticket Médio</CardLabel>
                 <CardValue>{currencyConverter(1193)}</CardValue>
                 <CardLabel>-2% este mês</CardLabel>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
         </Section>
 
         <Section>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8}>
-              <Card>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' }, gap: 3 }}>
+            <Card>
                 <CardTitle>Vendas nos últimos 6 meses</CardTitle>
                 <Box sx={{ mt: 2 }}>
                   <CustomChart
@@ -199,22 +182,18 @@ const Home = () => {
                   />
                 </Box>
               </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
               <Card>
                 <CardTitle>Top Vendedores</CardTitle>
                 <Box sx={{ mt: 2 }}>
                   <AvatarsList listData={topSellers} />
                 </Box>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
         </Section>
 
         <Section>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
-              <Card>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 2fr' }, gap: 3 }}>
+            <Card>
                 <CardTitle>Novos Leads</CardTitle>
                 <Box sx={{ mt: 2 }}>
                   <CustomChart
@@ -225,16 +204,13 @@ const Home = () => {
                   />
                 </Box>
               </Card>
-            </Grid>
-            <Grid item xs={12} md={8}>
               <Card>
                 <CardTitle>Leads Recentes</CardTitle>
                 <Box sx={{ mt: 2 }}>
                   <CustomTable headers={recentLeads.headers} rows={recentLeads.rows} />
                 </Box>
               </Card>
-            </Grid>
-          </Grid>
+            </Box>
         </Section>
       </Container>
     </HomeContainer>

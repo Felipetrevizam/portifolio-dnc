@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Container, Box, Avatar } from '@mui/material'
-import { Header, Card, CardTitle, CardLabel } from '../components'
+import { Header, Card } from '../components'
 import { pxToRem } from '../utils'
 
 const PerfilContainer = styled.div`
