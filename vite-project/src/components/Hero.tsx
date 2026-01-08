@@ -190,7 +190,7 @@ const Hero = () => {
         </HeroText>
         <HeroImage>
           <ProfileImage
-            src="/profile.jpg"
+            src="/foto.webp"
             alt={personalInfo.name}
             onError={(e) => {
               const target = e.target as HTMLImageElement
