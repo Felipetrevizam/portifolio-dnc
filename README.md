@@ -2,7 +2,7 @@
 
 Um portfólio profissional moderno e responsivo que apresenta a trajetória minha como pesquisador e desenvolvedor de software, com foco em Engenharia de Manufatura e Ciência de Dados.
 
-[Acesse o portfólio online aqui](https://dnc-portifolio-fhbt-git-main-felipetrevizams-projects.vercel.app)
+[Acesse o portfólio online aqui](https://portifolio-dnc-three.vercel.app)
 
 ## Como Começar
 
