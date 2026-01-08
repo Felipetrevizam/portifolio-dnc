@@ -1,0 +1,8 @@
+{
+  "name": "dnc-sales-dashboard-fhbt",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "vercel-build": "cd vite-project && npm install && npm run build && cd .. && cp -r vite-project/dist public"
+  }
+}
