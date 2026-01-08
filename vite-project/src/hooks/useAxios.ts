@@ -56,65 +56,71 @@ export const usePost = <T, P>(endpoint: string) => {
 }
 
 // Hook para requisições GET
-export const useGet = <T,>(endpoint: string) => {
+export const useGet = <T>(endpoint: string) => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<number | null>(null)
 
-  const getData = useCallback(async (config?: AxiosRequestConfig) => {
-    setData(null)
-    setLoading(true)
-    setError(null)
+  const getData = useCallback(
+    async (config?: AxiosRequestConfig) => {
+      setData(null)
+      setLoading(true)
+      setError(null)
 
-    try {
-      const response = await axiosInstance({
-        url: endpoint,
-        method: 'GET',
-        ...config,
-      })
-      setData(response.data)
-      return response.data
-    } catch (e: unknown) {
-      const axiosError = e as AxiosError
-      const status = axiosError.response?.status || 500
-      setError(status)
-      throw e
-    } finally {
-      setLoading(false)
-    }
-  }, [endpoint])
+      try {
+        const response = await axiosInstance({
+          url: endpoint,
+          method: 'GET',
+          ...config,
+        })
+        setData(response.data)
+        return response.data
+      } catch (e: unknown) {
+        const axiosError = e as AxiosError
+        const status = axiosError.response?.status || 500
+        setError(status)
+        throw e
+      } finally {
+        setLoading(false)
+      }
+    },
+    [endpoint]
+  )
 
   return { data, loading, error, getData }
 }
 
 // Hook para requisições DELETE
-export const useDelete = <T,>(endpoint: string) => {
+export const useDelete = <T>(endpoint: string) => {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<number | null>(null)
 
-  const deleteData = useCallback(async (config?: AxiosRequestConfig) => {
-    setData(null)
-    setLoading(true)
-    setError(null)
+  const deleteData = useCallback(
+    async (config?: AxiosRequestConfig) => {
+      setData(null)
+      setLoading(true)
+      setError(null)
 
-    try {
-      const response = await axiosInstance({
-        url: endpoint,
-        method: 'DELETE',
-        ...config,
-      })
-      setData(response.data)
-      return response.data
-    } catch (e: unknown) {
-      const axiosError = e as AxiosError
-      const status = axiosError.response?.status || 500
-      setError(status)
-      throw e
-    } finally {
-      setLoading(false)
-    }
-  }, [endpoint])
+      try {
+        const response = await axiosInstance({
+          url: endpoint,
+          method: 'DELETE',
+          ...config,
+        })
+        setData(response.data)
+        return response.data
+      } catch (e: unknown) {
+        const axiosError = e as AxiosError
+        const status = axiosError.response?.status || 500
+        setError(status)
+        throw e
+      } finally {
+        setLoading(false)
+      }
+    },
+    [endpoint]
+  )
 
   return { data, loading, error, deleteData }
 }

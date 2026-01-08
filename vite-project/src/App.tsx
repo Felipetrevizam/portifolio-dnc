@@ -3,7 +3,7 @@ import { useAuth } from './context'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/home'
 import Login from './pages/login'
-import Registration from './pages/registration'
+import Register from './pages/register'
 import Leads from './pages/leads'
 import Perfil from './pages/perfil'
 import './App.css'
@@ -20,7 +20,9 @@ function App() {
         />
         <Route
           path="/cadastro"
-          element={isAuthenticated ? <Navigate to="/" replace /> : <Registration />}
+          element={
+            isAuthenticated ? <Navigate to="/" replace /> : <Register />
+          }
         />
         <Route
           path="/"

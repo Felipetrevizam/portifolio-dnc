@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { usePost } from '../hooks/useAxios'
 import { useAuth } from '../context'
 import { pxToRem } from '../utils'
+import { findMockUser } from '../utils/mockAuth'
 
 const LoginArea = styled.div`
   display: flex;
@@ -17,7 +18,11 @@ const LoginArea = styled.div`
 `
 
 const LoginImage = styled.div`
-  background: linear-gradient(135deg, ${({ theme }) => theme.primary} 0%, ${({ theme }) => theme.primaryHover} 100%);
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.primary} 0%,
+    ${({ theme }) => theme.primaryHover} 100%
+  );
   height: 100vh;
   width: 50%;
   display: flex;
@@ -119,7 +124,11 @@ const Input = styled.input`
 const SubmitButton = styled.button`
   width: 100%;
   padding: ${pxToRem(12)};
-  background: linear-gradient(135deg, ${({ theme }) => theme.primary} 0%, ${({ theme }) => theme.primaryHover} 100%);
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.primary} 0%,
+    ${({ theme }) => theme.primaryHover} 100%
+  );
   color: white;
   border: none;
   border-radius: ${pxToRem(8)};
@@ -149,6 +158,19 @@ const ErrorMessage = styled.div`
   padding: ${pxToRem(12)};
   margin-bottom: ${pxToRem(16)};
   font-size: ${pxToRem(14)};
+`
+
+const RegisterLink = styled(Link)`
+  text-align: center;
+  color: ${({ theme }) => theme.primary};
+  text-decoration: none;
+  font-size: ${pxToRem(14)};
+  margin-top: ${pxToRem(16)};
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 const LoadingSpinner = styled.div`
@@ -187,7 +209,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate()
   const { login } = useAuth()
-  const { loading, error, postData } = usePost<LoginResponse, LoginData>('/auth/login')
+  const { loading, postData } = usePost<LoginResponse, LoginData>('/auth/login')
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -199,31 +221,32 @@ const Login = () => {
     }
 
     try {
+      // Primeiro, tentar com API real
       const response = await postData({ email, password })
       if (response) {
         login(response.token, response.user)
         navigate('/')
+        return
       }
     } catch {
-      if (error === 401) {
-        setErrorMessage('Email ou senha incorretos')
-      } else if (error === 500) {
-        setErrorMessage('Erro no servidor. Tente novamente mais tarde')
-      } else {
-        setErrorMessage('Erro ao fazer login. Tente novamente')
+      // Se API falhar, tentar com mock users
+      const mockUser = findMockUser(email, password)
+      if (mockUser) {
+        // Simular token JWT
+        const mockToken = `mock_token_${Date.now()}`
+        login(mockToken, {
+          id: mockUser.id,
+          name: mockUser.name,
+          email: mockUser.email,
+        })
+        navigate('/')
+        return
       }
+
+      // Se não encontrou no mock, mostrar erro
+      setErrorMessage('Email ou senha incorretos')
     }
   }
-
-  useEffect(() => {
-    if (error && !errorMessage) {
-      if (error === 401) {
-        setErrorMessage('Email ou senha incorretos')
-      } else {
-        setErrorMessage(`Erro ${error}: Não foi possível fazer login`)
-      }
-    }
-  }, [error, errorMessage])
 
   return (
     <LoginArea>
@@ -269,6 +292,8 @@ const Login = () => {
               {loading ? <LoadingSpinner /> : 'Entrar'}
             </SubmitButton>
           </form>
+
+          <RegisterLink to="/cadastro">Não tem conta? Crie uma</RegisterLink>
         </FormContainer>
       </LoginContent>
     </LoginArea>

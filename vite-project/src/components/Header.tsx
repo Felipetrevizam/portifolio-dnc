@@ -30,10 +30,10 @@ const LogoText = styled.span`
 `
 
 const ThemeToggle = styled(IconButton)`
-  &&{
+  && {
     margin-right: ${pxToRem(16)};
     color: ${({ theme }) => theme.textSecondary};
-    
+
     &:hover {
       background-color: ${({ theme }) => theme.primaryLight};
       color: ${({ theme }) => theme.primary};
@@ -42,10 +42,10 @@ const ThemeToggle = styled(IconButton)`
 `
 
 const LogoutButton = styled(IconButton)`
-  &&{
+  && {
     margin-left: ${pxToRem(12)};
     color: ${({ theme }) => theme.error};
-    
+
     &:hover {
       background-color: ${({ theme }) => theme.error}20;
     }

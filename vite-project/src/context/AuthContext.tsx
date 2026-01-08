@@ -1,12 +1,21 @@
 import React, { useState, useEffect, useRef, useTransition } from 'react'
 import type { ReactNode } from 'react'
-import { AuthContext, type User, type AuthContextType } from './AuthContextDefinition'
+import {
+  AuthContext,
+  type User,
+  type AuthContextType,
+} from './AuthContextDefinition'
 
 export type { User, AuthContextType }
 export { AuthContext }
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, setState] = useState<{ user: User | null; token: string | null }>({
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [state, setState] = useState<{
+    user: User | null
+    token: string | null
+  }>({
     user: null,
     token: null,
   })

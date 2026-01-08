@@ -21,22 +21,26 @@ Dashboard de vendas moderno e responsivo desenvolvido com React, TypeScript e St
 ### Instalação
 
 1. Clonar o repositório
+
 ```bash
 git clone <seu-repositorio>
 cd vite-project
 ```
 
 2. Instalar dependências
+
 ```bash
 npm install
 ```
 
 3. Configurar variáveis de ambiente
+
 ```bash
 cp .env.example .env
 ```
 
 4. Iniciar o servidor de desenvolvimento
+
 ```bash
 npm run dev
 ```
@@ -70,17 +74,20 @@ O projeto utiliza autenticação baseada em tokens JWT:
 ## 📊 Endpoints da API
 
 ### Vendas
+
 - `GET /api/sales/highlights` - Destaques de vendas
 - `GET /api/sales/month` - Vendas do mês
 - `GET /api/sales/year` - Vendas do ano
 - `GET /api/sales/stars` - Top vendedores
 
 ### Leads
+
 - `GET /api/leads` - Listar leads
 - `POST /api/leads` - Criar novo lead
 - `DELETE /api/leads/{id}` - Deletar lead
 
 ### Notícias
+
 - `GET /api/news` - Listar notícias
 
 ## 🛠️ Desenvolvimento
@@ -101,13 +108,17 @@ src/
 ### Custom Hooks
 
 #### `useAxios`
+
 Hooks para requisições HTTP com Axios:
+
 - `useGet<T>` - Requisições GET
 - `usePost<T, P>` - Requisições POST
 - `useDelete<T>` - Requisições DELETE
 
 #### `useApi`
+
 Hooks específicos para endpoints da API:
+
 - `useSalesHighlights()`
 - `useMonthlySales()`
 - `useYearlySales()`
@@ -116,7 +127,9 @@ Hooks específicos para endpoints da API:
 - `useNews()`
 
 #### `useAuth`
+
 Hook para acessar contexto de autenticação:
+
 ```typescript
 const { user, token, isAuthenticated, login, logout } = useAuth()
 ```
@@ -143,11 +156,13 @@ npm run lint     # Executar linter
 ## 🔒 Proteção de Rotas
 
 Rotas protegidas:
+
 - `/` - Home (requer autenticação)
 - `/leads` - Gerenciamento de leads (requer autenticação)
 - `/perfil` - Perfil do usuário (requer autenticação)
 
 Rotas públicas:
+
 - `/login` - Login
 - `/cadastro` - Registro
 

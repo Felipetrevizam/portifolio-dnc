@@ -109,11 +109,31 @@ const ActionButton = styled.button`
 
 const Home = () => {
   // API hooks
-  const { data: highlights, loading: highlightsLoading, getData: getHighlights } = useSalesHighlights()
-  const { data: monthlySalesData, loading: monthlySalesLoading, getData: getMonthlySales } = useMonthlySales()
-  const { data: yearlySalesData, loading: yearlySalesLoading, getData: getYearlySales } = useYearlySales()
-  const { data: topSellersData, loading: topSellersLoading, getData: getTopSellers } = useTopSellers()
-  const { data: leadsData, loading: leadsLoading, getData: getLeads } = useLeads()
+  const {
+    data: highlights,
+    loading: highlightsLoading,
+    getData: getHighlights,
+  } = useSalesHighlights()
+  const {
+    data: monthlySalesData,
+    loading: monthlySalesLoading,
+    getData: getMonthlySales,
+  } = useMonthlySales()
+  const {
+    data: yearlySalesData,
+    loading: yearlySalesLoading,
+    getData: getYearlySales,
+  } = useYearlySales()
+  const {
+    data: topSellersData,
+    loading: topSellersLoading,
+    getData: getTopSellers,
+  } = useTopSellers()
+  const {
+    data: leadsData,
+    loading: leadsLoading,
+    getData: getLeads,
+  } = useLeads()
 
   // Load data on component mount
   useEffect(() => {
@@ -261,9 +281,14 @@ const Home = () => {
               </Card>
             ) : highlights && highlights.length > 0 ? (
               highlights.map((highlight) => (
-                <Card key={highlight.title} variant={highlight.alert ? 'error' : 'info'}>
+                <Card
+                  key={highlight.title}
+                  variant={highlight.alert ? 'error' : 'info'}
+                >
                   <CardLabel>{highlight.title}</CardLabel>
-                  <CardValue>{currencyConverter(Number(highlight.value))}</CardValue>
+                  <CardValue>
+                    {currencyConverter(Number(highlight.value))}
+                  </CardValue>
                   <CardLabel>{highlight.subtitle}</CardLabel>
                 </Card>
               ))
@@ -289,7 +314,9 @@ const Home = () => {
               <CardTitle>Vendas nos últimos 6 meses</CardTitle>
               <Box sx={{ mt: 2 }}>
                 {monthlySalesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '40px 0' }}>Carregando gráfico...</div>
+                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                    Carregando gráfico...
+                  </div>
                 ) : (
                   <CustomChart
                     labels={salesChartData.labels}
@@ -304,7 +331,9 @@ const Home = () => {
               <CardTitle>Top Vendedores</CardTitle>
               <Box sx={{ mt: 2 }}>
                 {topSellersLoading ? (
-                  <div style={{ textAlign: 'center', padding: '40px 0' }}>Carregando vendedores...</div>
+                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                    Carregando vendedores...
+                  </div>
                 ) : (
                   <AvatarsList listData={topSellersList} />
                 )}
@@ -325,7 +354,9 @@ const Home = () => {
               <CardTitle>Novos Leads</CardTitle>
               <Box sx={{ mt: 2 }}>
                 {yearlySalesLoading ? (
-                  <div style={{ textAlign: 'center', padding: '40px 0' }}>Carregando gráfico...</div>
+                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                    Carregando gráfico...
+                  </div>
                 ) : (
                   <CustomChart
                     labels={leadsChartData.labels}
@@ -340,7 +371,9 @@ const Home = () => {
               <CardTitle>Leads Recentes</CardTitle>
               <Box sx={{ mt: 2 }}>
                 {leadsLoading ? (
-                  <div style={{ textAlign: 'center', padding: '40px 0' }}>Carregando leads...</div>
+                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                    Carregando leads...
+                  </div>
                 ) : (
                   <CustomTable
                     headers={recentLeadsTable.headers}
