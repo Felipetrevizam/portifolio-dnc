@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import { pxToRem } from '../utils'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Avatar, Box, Container, IconButton } from '@mui/material'
 import { useContext } from 'react'
 import { AppThemeContext } from '../context/AppThemeContext'
+import { useAuth } from '../context'
 
 const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.cardBackground};
@@ -20,13 +21,19 @@ const LogoText = styled.span`
   font-weight: 700;
   color: ${({ theme }) => theme.primary};
   letter-spacing: -0.5px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `
 
 const ThemeToggle = styled(IconButton)`
-  && {
+  &&{
     margin-right: ${pxToRem(16)};
     color: ${({ theme }) => theme.textSecondary};
-
+    
     &:hover {
       background-color: ${({ theme }) => theme.primaryLight};
       color: ${({ theme }) => theme.primary};
@@ -34,8 +41,26 @@ const ThemeToggle = styled(IconButton)`
   }
 `
 
+const LogoutButton = styled(IconButton)`
+  &&{
+    margin-left: ${pxToRem(12)};
+    color: ${({ theme }) => theme.error};
+    
+    &:hover {
+      background-color: ${({ theme }) => theme.error}20;
+    }
+  }
+`
+
 const Header = () => {
   const themeContext = useContext(AppThemeContext)
+  const { logout, user } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <StyledHeader>
@@ -48,26 +73,34 @@ const Header = () => {
             height: pxToRem(70),
           }}
         >
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <LogoText>DNC Sales</LogoText>
           </Link>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <ThemeToggle onClick={themeContext?.toggleTheme} size="small">
               {themeContext?.appTheme === 'light' ? '🌙' : '☀️'}
             </ThemeToggle>
-            <Link to="/perfil">
-              <Avatar
-                alt="Usuário"
-                src="/dncavatar.svg"
-                sx={{
-                  width: 40,
-                  height: 40,
-                  cursor: 'pointer',
-                  border: '2px solid',
-                  borderColor: 'primary.main',
-                }}
-              />
-            </Link>
+            {user && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <span style={{ fontSize: '0.875rem' }}>{user.name}</span>
+                <Link to="/perfil">
+                  <Avatar
+                    alt={user.name}
+                    src="/dncavatar.svg"
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      cursor: 'pointer',
+                      border: '2px solid',
+                      borderColor: 'primary.main',
+                    }}
+                  />
+                </Link>
+              </Box>
+            )}
+            <LogoutButton onClick={handleLogout} size="small" title="Sair">
+              🚪
+            </LogoutButton>
           </Box>
         </Box>
       </Container>

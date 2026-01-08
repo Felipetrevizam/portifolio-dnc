@@ -223,7 +223,10 @@ const Leads = () => {
         <ContentSection>
           <PageTitle>Gerenciamento de Leads</PageTitle>
           <Card>
-            <CustomTable headers={leadsTableData.headers} rows={leadsTableData.rows} />
+            <CustomTable
+              headers={leadsTableData.headers}
+              rows={leadsTableData.rows}
+            />
           </Card>
         </ContentSection>
       </Container>

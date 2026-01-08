@@ -96,7 +96,10 @@ const CustomChart: React.FC<CustomChartProps> = ({
         boxPadding: 6,
         usePointStyle: true,
         callbacks: {
-          label: function (context: { dataset: { label?: string }; parsed: { y: number | null } }) {
+          label: function (context: {
+            dataset: { label?: string }
+            parsed: { y: number | null }
+          }) {
             let label = context.dataset.label || ''
             if (label) {
               label += ': '

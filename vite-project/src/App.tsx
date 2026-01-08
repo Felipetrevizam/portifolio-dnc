@@ -1,16 +1,51 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Login, Registration, Leads, Perfil } from './pages';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './context'
+import ProtectedRoute from './components/ProtectedRoute'
+import Home from './pages/home'
+import Login from './pages/login'
+import Registration from './pages/registration'
+import Leads from './pages/leads'
+import Perfil from './pages/perfil'
 import './App.css'
 
 function App() {
+  const { isAuthenticated } = useAuth()
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cadastro" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/perfil" element={<Perfil />} />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/cadastro"
+          element={isAuthenticated ? <Navigate to="/" replace /> : <Registration />}
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/leads"
+          element={
+            <ProtectedRoute>
+              <Leads />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

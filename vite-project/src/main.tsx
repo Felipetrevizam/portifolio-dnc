@@ -3,13 +3,16 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AppThemeProvider } from './context/AppThemeContext'
+import { AuthProvider } from './context/AuthContext'
 import GlobalStyle from './GlobalStyle'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AppThemeProvider>
-      <GlobalStyle />
-      <App />
-    </AppThemeProvider>
-  </StrictMode>,
+    <AuthProvider>
+      <AppThemeProvider>
+        <GlobalStyle />
+        <App />
+      </AppThemeProvider>
+    </AuthProvider>
+  </StrictMode>
 )

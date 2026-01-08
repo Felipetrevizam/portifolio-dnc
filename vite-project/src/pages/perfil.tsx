@@ -74,7 +74,7 @@ const Perfil = () => {
       <Container maxWidth="md">
         <ContentSection>
           <PageTitle>Meu Perfil</PageTitle>
-          
+
           <ProfileCard>
             <AvatarContainer>
               <Avatar
@@ -88,10 +88,10 @@ const Perfil = () => {
                 }}
               />
             </AvatarContainer>
-            
+
             <UserName>Felipe Trevizam</UserName>
             <UserRole>Gerente de Vendas</UserRole>
-            
+
             <Box sx={{ mt: 3, textAlign: 'left' }}>
               <InfoRow>
                 <InfoLabel>Email:</InfoLabel>
