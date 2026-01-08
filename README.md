@@ -2,6 +2,8 @@
 
 Portfólio profissional moderno desenvolvido com React, TypeScript e Vite, apresentando a trajetória acadêmica e profissional de Felipe Trevizam, pesquisador e desenvolvedor especializado em Engenharia de Manufatura e Ciência de Dados.
 
+🚀 **[Ver Portfólio Online](https://dnc-portifolio-fhbt-git-main-felipetrevizams-projects.vercel.app)**
+
 ![React](https://img.shields.io/badge/React-19.2.3-61dafb?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178c6?logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7.2.4-646cff?logo=vite)
