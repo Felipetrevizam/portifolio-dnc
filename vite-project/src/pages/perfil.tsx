@@ -1,46 +1,128 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { Container, Box, Avatar } from '@mui/material'
+import { Header, Card, CardTitle, CardLabel } from '../components'
+import { pxToRem } from '../utils'
 
 const PerfilContainer = styled.div`
   min-height: 100vh;
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+  background-color: ${({ theme }) => theme.background};
+`
 
-const PerfilCard = styled.div`
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-`;
+const ContentSection = styled.section`
+  padding: ${pxToRem(40)} 0;
+`
 
-const PerfilTitle = styled.h1`
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+const PageTitle = styled.h1`
+  font-size: ${pxToRem(36)};
+  font-weight: 700;
+  color: ${({ theme }) => theme.textPrimary};
+  margin-bottom: ${pxToRem(32)};
+  letter-spacing: -0.5px;
+`
+
+const ProfileCard = styled(Card)`
   text-align: center;
-`;
+`
 
-const PerfilInfo = styled.p`
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #333;
-`;
+const AvatarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${pxToRem(24)};
+`
+
+const InfoRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: ${pxToRem(16)} 0;
+  border-bottom: 1px solid ${({ theme }) => theme.borderLight};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`
+
+const InfoLabel = styled.span`
+  font-size: ${pxToRem(14)};
+  font-weight: 600;
+  color: ${({ theme }) => theme.textSecondary};
+`
+
+const InfoValue = styled.span`
+  font-size: ${pxToRem(14)};
+  font-weight: 600;
+  color: ${({ theme }) => theme.textPrimary};
+`
+
+const UserName = styled.h2`
+  font-size: ${pxToRem(28)};
+  font-weight: 700;
+  color: ${({ theme }) => theme.textPrimary};
+  margin: 0 0 ${pxToRem(8)} 0;
+`
+
+const UserRole = styled.p`
+  font-size: ${pxToRem(16)};
+  color: ${({ theme }) => theme.primary};
+  margin: 0 0 ${pxToRem(24)} 0;
+  font-weight: 600;
+`
 
 const Perfil = () => {
   return (
     <PerfilContainer>
-      <PerfilTitle>Perfil do Usuário</PerfilTitle>
-      <PerfilCard>
-        <PerfilInfo><strong>Nome:</strong> Usuário</PerfilInfo>
-        <PerfilInfo><strong>Email:</strong> usuario@example.com</PerfilInfo>
-        <PerfilInfo><strong>Empresa:</strong> DNC Sales</PerfilInfo>
-      </PerfilCard>
+      <Header />
+      <Container maxWidth="md">
+        <ContentSection>
+          <PageTitle>Meu Perfil</PageTitle>
+          
+          <ProfileCard>
+            <AvatarContainer>
+              <Avatar
+                alt="Usuário"
+                src="/dncavatar.svg"
+                sx={{
+                  width: 120,
+                  height: 120,
+                  border: '4px solid',
+                  borderColor: 'primary.main',
+                }}
+              />
+            </AvatarContainer>
+            
+            <UserName>Felipe Trevizam</UserName>
+            <UserRole>Gerente de Vendas</UserRole>
+            
+            <Box sx={{ mt: 3, textAlign: 'left' }}>
+              <InfoRow>
+                <InfoLabel>Email:</InfoLabel>
+                <InfoValue>felipe.trevizam@dnc.com</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>Telefone:</InfoLabel>
+                <InfoValue>(11) 99999-9999</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>Empresa:</InfoLabel>
+                <InfoValue>DNC Sales</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>Departamento:</InfoLabel>
+                <InfoValue>Vendas</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>Localização:</InfoLabel>
+                <InfoValue>São Paulo, SP</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>Membro desde:</InfoLabel>
+                <InfoValue>Janeiro 2024</InfoValue>
+              </InfoRow>
+            </Box>
+          </ProfileCard>
+        </ContentSection>
+      </Container>
     </PerfilContainer>
-  );
-};
+  )
+}
 
-export default Perfil;
+export default Perfil
