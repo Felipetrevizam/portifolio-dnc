@@ -192,7 +192,7 @@ const Hero = () => {
           <ProfileImage
             src="/foto.webp"
             alt={personalInfo.name}
-            onError={(e) => {
+            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
               const target = e.target as HTMLImageElement
               target.src = `https://ui-avatars.com/api/?name=${personalInfo.name}&size=400&background=667eea&color=fff&bold=true`
             }}
